@@ -1,13 +1,13 @@
 # user-tracking
 
 ## Sem4. Kafka
-В этом занятии мы познакомимся с Apache [Kafka](https://kafka.apache.org/), инструмента для потоковой передачи данных. 
+В этом занятии мы познакомимся с [Apache Kafka](https://kafka.apache.org/), инструментом для потоковой передачи данных. 
 Для демонстрации мы воспользуемся сервисом [Confluent Cloud](https://www.confluent.io/confluent-cloud/) 
 и построим пайплайн для записи событий кликов пользователей из датасета [Avazu](https://www.kaggle.com/c/avazu-ctr-prediction).
 
 План занятия:
 - Поднимем Kafka кластер и создадим топик для коммита сообщения в [Confluent Cloud](https://www.confluent.io/confluent-cloud/) 
-- Напишем Producer для записи сообщений в топик с помощью API Python [confluent_kafka_python](https://github.com/confluentinc/confluent-kafka-python)
+- Напишем Producer для записи сообщений в топик с помощью API [confluent_kafka_python](https://github.com/confluentinc/confluent-kafka-python)
 - Поднимем [S3 sink connector](https://docs.confluent.io/kafka-connectors/s3-sink/current/overview.html) для аггрегации сообщений за час и передачи данных из топика в бакет S3 в виде датасета в формате json
 
 Финальный пайплайн будет выглядеть следующим образом
@@ -27,7 +27,7 @@ confluent kafka cluster use <clusterid>
 # check list of topics
 confluent kafka topic list
 
-# list of KConect connectors
+# check list of KConect connectors and create connector
 confluent connect cluster list
 confluent connect cluster create --config-file config/s3_sink_connector_config.json
 ```
@@ -44,5 +44,5 @@ S3 sink коннектор, который читает сообщения с т
 ![img_2.png](imgs/img_2.png)
 
 
-Финальный результат: датасет активностей пользователей за час, записанный коннектором в json формате и распределенные по 6 партициям
+Финальный результат: датасет активностей пользователей за час, записанный коннектором в json формате и распределенный по 6 партициям
 ![img_3.png](imgs/img_3.png)
